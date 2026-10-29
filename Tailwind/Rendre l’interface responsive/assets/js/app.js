@@ -1,12 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Éléments du DOM
+
     const tbody = document.getElementById('table-categories-body');
     const btnShowForm = document.getElementById('btn-show-form');
     const btnCancelForm = document.getElementById('btn-cancel-form');
     const sectionForm = document.getElementById('section-form');
     const formCategorie = document.getElementById('form-categorie');
     const btnEnregistrer = document.getElementById('btn-enregistrer-categorie');
+const spinner = document.getElementById("spinner");
+const btnText = document.getElementById("btn-text");
+
+btnEnregistrer.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    if (btnEnregistrer.disabled) return;
+
+
+    btnEnregistrer.disabled = true;
+    spinner.classList.remove("hidden");
+    btnText.textContent = "Enregistrement...";
+
+    try {
+
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        console.log("Enregistrement terminé !");
+    } catch (error) {
+        console.error("Erreur :", error);
+    } finally {
+
+        btnEnregistrer.disabled = false;
+        spinner.classList.add("hidden");
+        btnText.textContent = "Enregistrer";
+    }
+});
 
     function setLoadingState(isLoading) {
         btnEnregistrer.disabled = isLoading;
